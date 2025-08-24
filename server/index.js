@@ -9,13 +9,12 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const _dirname = path.dirname(__filename);
-//"https://helpcode-1.onrender.com
 
 dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin:  process.env.FrONTEND_URL,
+app.use(cors({ origin: "https://helpcode-1.onrender.com",
    credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
