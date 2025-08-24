@@ -14,7 +14,8 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: process.env.FRONTEND_URL, credentials: true }));
+app.use(cors({ origin: "https://helpcode-1.onrender.com",
+   credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
