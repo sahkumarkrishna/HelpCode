@@ -23,11 +23,11 @@ app.use("/api/auth", UserRoute);
 app.use("/api/v1/review", codeReviewRoute);
 
 // Serve static frontend (Vite build)
-const staticPath = path.join(_dirname, "client", "dist");
+const staticPath = path.join(_dirname, "..", "client", "dist");  // <-- Notice the ".." here
 app.use(express.static(staticPath));
 
 // Fallback route for SPA (non-API)
- app.get(/^\/(?!api).*/, (_, res) => {
+app.get(/^\/(?!api).*/, (_, res) => {
   res.sendFile(path.join(staticPath, "index.html"));
 });
 
