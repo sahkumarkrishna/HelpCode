@@ -2,10 +2,7 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-
-// Signup
-
-
+// Signup controller
 export const signup = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
@@ -29,7 +26,7 @@ export const signup = async (req, res) => {
     // 4. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 5. Create user
+    // 5. Create new user
     const newUser = new User({
       name,
       email: email.toLowerCase(),
@@ -38,7 +35,7 @@ export const signup = async (req, res) => {
 
     await newUser.save();
 
-    // 6. Send response
+    // 6. Send success response
     res.status(201).json({
       message: "User registered successfully",
       user: {
@@ -53,8 +50,7 @@ export const signup = async (req, res) => {
   }
 };
 
-
-// Login
+// Login controller
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -63,7 +59,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Email and password are required" });
     }
 
-    const user = await User.findOne({ email }).select("+password"); // ensure password is available
+    const user = await User.findOne({ email }).select("+password");
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -95,10 +91,10 @@ export const login = async (req, res) => {
 };
 
 // Logout
-
 export const logout = (req, res) => {
   res.json({ message: 'Logged out successfully' });
 };
+
 // Update Password (with confirm password)
 export const updateProfile = async (req, res) => {
   try {
