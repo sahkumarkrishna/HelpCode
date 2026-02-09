@@ -1,13 +1,12 @@
-// src/pages/ProfileIcon.jsx
 import { useState, useRef, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
-import { FiLogOut, FiClock } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
+import { FaRocket } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import toast from "react-hot-toast";
-
-const API_URL = import.meta.env.VITE_USER_API; // Make sure this points to your backend
+import API_ENDPOINTS from "../config/api";
 
 export default function ProfileIcon() {
   const [open, setOpen] = useState(false);
@@ -29,7 +28,7 @@ export default function ProfileIcon() {
   const handleLogout = async () => {
     try {
       // Call backend logout endpoint
-      await axios.post(`${API_URL}/logout`, {}, {
+      await axios.post(API_ENDPOINTS.AUTH.LOGOUT, {}, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`, // if using JWT
         },
@@ -53,9 +52,9 @@ export default function ProfileIcon() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-center p-2 rounded-full hover:bg-gray-100 transition"
+        className="flex items-center justify-center p-2 rounded-full hover:bg-white/20 transition"
       >
-        <CgProfile className="text-gray-700" size={32} />
+        <CgProfile className="text-white" size={32} />
       </button>
 
       <AnimatePresence>
@@ -65,22 +64,30 @@ export default function ProfileIcon() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -5 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 mt-2 w-48  shadow-xl rounded-xl border p-2 z-50"
+            className="absolute right-0 mt-2 w-56 bg-white/10 backdrop-blur-xl shadow-xl rounded-xl border border-white/20 p-2 z-50 max-h-96 overflow-y-auto custom-scrollbar"
           >
             <Link
+              to="/dashboard"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg transition text-white hover:bg-white/10 text-sm"
+              onClick={() => setOpen(false)}
+            >
+              <FaRocket size={16} /> Dashboard
+            </Link>
+
+            <Link
               to="/profile"
-              className="flex items-center gap-3 px-4 py-2 rounded-lg transition text-white hover:text-gray-400 hover:text-lg"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg transition text-white hover:bg-white/10 text-sm"
               onClick={() => setOpen(false)}
             >
               <CgProfile size={18} /> Profile
             </Link>
 
 
-            <hr className="my-2 border-gray-200" />
+            <hr className="my-2 border-white/20" />
 
             <button
               onClick={handleLogout}
-              className="flex w-full items-center gap-3 px-4 py-2 rounded-lg  transition text-red-400 hover:text-lg"
+              className="flex w-full items-center gap-3 px-4 py-2 rounded-lg transition text-red-400 hover:bg-red-500/20 text-sm"
             >
               <FiLogOut size={18} /> Logout
             </button>

@@ -99,7 +99,7 @@ export const logout = (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { password: newPassword, confirmPassword, currentPassword } = req.body;
-    const userId = req.id; // user ID from authentication middleware
+    const userId = req.user._id; // user ID from authentication middleware
 
     if (!currentPassword)
       return res.status(400).json({ message: "Current password is required", success: false });
