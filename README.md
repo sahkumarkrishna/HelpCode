@@ -1,9 +1,8 @@
-﻿
-# AI Powered HelpCode
+# HelpCode AI
 
 ## Overview
 
-AI Code Check is a web application that allows users to input code snippets and receive feedback on their code quality, style, and potential improvements. The application leverages AI to provide insightful reviews and suggestions.
+HelpCode AI is a comprehensive AI-powered web application that provides developers with intelligent coding assistance, code reviews, DSA problem solving, debugging, and more. The application leverages advanced AI to provide insightful reviews and solutions.
 
 ## Features
 
